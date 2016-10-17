@@ -1,9 +1,9 @@
 #Need to access server through SSH
 if ssh $1@$2;
 then
-    echo "hwllo"
+    
 else
-    echo "na"
+    echo "Server Can't be reached'"
 fi
 
 #echo $message
