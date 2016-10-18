@@ -45,6 +45,25 @@ then
     else
         sudo apt-get update
         sudo apt-get install nginx
+        ufw_status=$(sudo ufw status)
+
+        if $ufw_status != "Status: inactive";
+        then
+            echo "ufw is active"
+            nginx_status=$(sudo ufw status | grep "^Nginx HTTP" | awk -F' ' '{print $3}')
+            nginx_v6_status=$(sudo ufw status | grep "^Nginx HTTP (v6)" | awk -F' ' '{print $4}')
+        
+            if $nginx_status = deny || $nginx_v6_status = deny;
+            then
+                sudo ufw allow 'Nginx HTTP'
+            else
+                echo "Nginx completely installed"
+            fi
+            
+        else
+            sudo ufw enable
+            sudo ufw allow 'Nginx HTTP'
+            
     fi
 
 
