@@ -63,6 +63,7 @@ then
         else
             sudo ufw enable
             sudo ufw allow 'Nginx HTTP'
+        fi
             
     fi
 
@@ -103,13 +104,8 @@ then
     sudo a2ensite $domain.conf
 
     sudo service apache2 restart
-    
-    #host domain on server
 
     #install wordpress on server
-
-
-
 
 else
     echo "Server Can't be reached'"
