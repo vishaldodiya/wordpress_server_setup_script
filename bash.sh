@@ -100,6 +100,10 @@ then
                 ErrorLog \${APACHE_LOG_DIR}/error.log\
                 CustomLog \${APACHE_LOG_DIR}/access.log" > /etc/apache2/sites-available/$domain.conf
 
+    sudo a2ensite $domain.conf
+
+    sudo service apache2 restart
+    
     #host domain on server
 
     #install wordpress on server
