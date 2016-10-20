@@ -73,6 +73,33 @@ then
     echo -n "Enter your Domain name"
     read domain
 
+    #making domain directory
+
+    sudo mkdir -p /var/www/$domain/public_html
+    
+    #granting permission
+
+    sudo chown -R www-data:www-data /var/www/$domain/public_html
+    sudo chmod -R 755 /var/www/$domain/public_html
+
+    sudo echo "<html>\
+                    <head>\
+                        <title>\
+                            Welcome hosted!\
+                        </title>\
+                    </head>\
+                    
+                    <body>\
+                        <h1>It Worked!!! :) :)</h1>\
+                    </body>\
+                </html>" > /var/www/$domain/public_html/index.html
+
+    sudo echo "DocumentRoot /var/www/$domain/public_html\
+                ServerName www.$domain\
+                ServerAlias $domain\
+                ErrorLog \${APACHE_LOG_DIR}/error.log\
+                CustomLog \${APACHE_LOG_DIR}/access.log" > /etc/apache2/sites-available/$domain.conf
+
     #host domain on server
 
     #install wordpress on server
