@@ -107,6 +107,20 @@ then
 
     #install wordpress on server
 
+    wget -c http://wordpress.org/latest.tar.gz
+
+    tar -xzvf latest.tar.gz
+
+    sudo rsync -av wordpress/* /var/www/$domain/
+
+    #setting up database
+
+    mysql -u root -p
+
+    CREATE DATABASE $domain\_db;
+
+    
+
     
 
 else
