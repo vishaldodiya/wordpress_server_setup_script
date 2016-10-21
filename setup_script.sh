@@ -1,6 +1,6 @@
-    apache=$(apt-chace policy apache2 | grep "Installed" | awk -F' ' '{print $2}')
+    apache=$(apt-cache policy apache2 | grep "Installed" | awk -F' ' '{print $2}')
     
-    if $apache != "(none)";
+    if test $apache != "(none)";
     then 
         echo "Apache2 is already installed"
     else
@@ -11,7 +11,7 @@
 
     php=$(apt-cache policy php | grep "Installed" | awk -F' ' '{print $2}')
 
-    if $php != "(none)";
+    if test $php != "(none)";
     then
         echo "Php is already installed"
     else
@@ -22,7 +22,7 @@
 
     mysql=$(apt-cache policy mysql | grep "Installed" | awk -F' ' '{print $2}')
 
-    if $mysql != "(none)";
+    if test $mysql != "(none)";
     then 
         echo "Mysql is already installed"
     else
@@ -33,7 +33,7 @@
 
     nginx=$(apt-cache policy nginx | grep "Installed" | awk -F' ' '{print $2}')
 
-    if $nginx != "(none)";
+    if test $nginx != "(none)";
     then 
         echo "Nginx is already installed"
     else
