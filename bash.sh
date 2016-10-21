@@ -107,6 +107,8 @@ then
 
     #install wordpress on server
 
+    
+
 else
     echo "Server Can't be reached'"
 fi
