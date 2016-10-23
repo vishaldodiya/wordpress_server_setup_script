@@ -1,6 +1,6 @@
 #Need to access server through SSH
 #if 
-ssh $1@$2 'bash -s' < setup_script.sh;
+ssh -v $1@$2 'bash -s' < setup_script.sh;
 #then
 
     #checking for apache2
