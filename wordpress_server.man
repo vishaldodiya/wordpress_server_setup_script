@@ -14,3 +14,18 @@ wordpress_server is smart command that deploy wordpress server on user specified
 
 Another module that wordpress server check is for Nginx which accelerates content and application delivery, improves security, facilitates availability and scalability for the busiest web sites on the Internet.If Nginx is not installed than it will be installed by wordpress_server command on ubuntu server with proper firewall previlidges
 
+wordpress_server ask for domain name and it will configure ubuntu server to support that domain name.
+
+After setting up the modules and domain name it will download latest wordpress zip file. It will unzip the file into domain name folder and also install database.
+
+.SH OPTIONS
+wordpress_server does not take any option but need two arguments host username and ip address.
+
+.SH SEE ALSO
+there are no related command like this. wordpress_server is one of its kind.
+
+.SH BUGS
+Tested on only virtual machine.
+
+.SH AUTHOR
+Vishal Dodiya (vdodiya03@gmail.com)
