@@ -3,6 +3,10 @@ sudo cp setup_script.sh /bin/setup_script.sh
 
 sudo chmod +x /bin/wordpress_server
 
+sudo tar -czvf wordpress_server.tar.gz wordpress_server.man
+
+sudo mv wordpress_server.tar.gz /usr/share/man/man1/
+
 ssh-keygen -t rsa
 
 if test -f .ssh/authorized_keys;
