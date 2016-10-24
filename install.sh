@@ -1,4 +1,4 @@
-if test $1 = 0 || $2 = 0;[ -z "$1" || -z "$2"]
+if [ -z "$1" || -z "$2"]
 then
     echo "Enter valid Argument"
     echo "Enter command in specified format: wordpress_server <username> <ip address>"
