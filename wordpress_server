@@ -1,25 +1,6 @@
 #!/bin/bash
 #Need to access server through SSH
-#if
-#if test -f ~/.ssh/id_rsa;
-#then
-#    echo "public key file exist"
-#    ssh $1@$2 'bash -s' < check_key.sh;
-#else
-#    ssh-keygen -t rsa
-#    ssh $1@$2 'bash -s' < check_key.sh;                      
-#fi
-
-#cat ~/.ssh/id_rsa.pub | ssh -l $1 $2 "cat > .ssh/authorized_keys"
 
 
 ssh -v -l $1@$2 'bash -s' < setup_script.sh;
-#then
 
-    #checking for apache2
-#else
-#    echo "Server Can't be reached'"
-#fi
-
-#echo $message
-#check for apache, PHP, mysql, or nginx installed or not 
