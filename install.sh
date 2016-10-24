@@ -1,4 +1,4 @@
-if [ -z "$1" || -z "$2"]
+if [ -z "$1" -o -z "$2" ]
 then
     echo "Enter valid Argument"
     echo "Enter command in specified format: wordpress_server <username> <ip address>"
@@ -9,19 +9,22 @@ sudo cp setup_script.sh /bin/setup_script.sh
 
 sudo chmod +x /bin/wordpress_server
 
-sudo tar -czvf wordpress_server.tar.gz wordpress_server.man
+sudo tar -czvf wordpress_server.gz wordpress_server.man
 
 sudo mv wordpress_server.tar.gz /usr/share/man/man1/
 
 ssh-keygen -t rsa
 
-if test -f .ssh/authorized_keys;
-then
-    echo 'authorized key exist'
-else 
+ssh $1@$2
+
+#if test -f .ssh/authorized_keys;
+#then
+#    echo 'authorized key exist'
+#else 
     mkdir .ssh
     touch .ssh/authorized_keys
-fi
+    exit
+#fi
 
 cat ~/.ssh/id_rsa.pub | ssh -l $1 $2 "cat >> .ssh/authorized_keys"
 

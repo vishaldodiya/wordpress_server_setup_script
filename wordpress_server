@@ -1,6 +1,6 @@
 #!/bin/bash
 #Need to access server through SSH
 
-
-ssh -v -l $1@$2 'bash -s' < setup_script.sh;
+ssh -l $1 $2
+#ssh -v -t -l $1@$2 'bash -s' < /usr/local/bin/setup_script.sh
 
