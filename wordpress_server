@@ -1,6 +1,11 @@
 #!/bin/bash
-#Need to access server through SSH
+if [ -z "$1" -o -z "$2" ]
+then
+    echo "Enter valid Argument"
+    echo "Enter command in specified format: wordpress_server <username> <ip address>"
+    echo "for more information see MAN page of wordpress_server"
+else
 
-ssh -l $1 $2
-#ssh -v -t -l $1@$2 'bash -s' < /usr/local/bin/setup_script.sh
+ssh -v -l $1 $2 'bash -s' < /usr/local/bin/setup_script.sh;
 
+fi
