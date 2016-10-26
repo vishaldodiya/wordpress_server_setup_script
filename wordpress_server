@@ -1,11 +1,11 @@
 #!/bin/bash
-if [ -z "$1" -o -z "$2" ]
+if [ -z "$1" -o -z "$2" -o -z "$3" ]
 then
     echo "Enter valid Argument"
-    echo "Enter command in specified format: wordpress_server <username> <ip address>"
+    echo "Enter command in specified format: wordpress_server <username> <ip address> <example.com>"
     echo "for more information see MAN page of wordpress_server"
 else
 
-ssh -v -l $1 $2 'bash -s' < /usr/local/bin/setup_script.sh;
+ssh -l $1 $2 'bash -s' < /usr/local/bin/setup_script.sh;
 
 fi
