@@ -89,7 +89,7 @@ sudo printf "<VirtualHost *:80>
     ServerName www.$1
     ServerAlias $1
     ErrorLog \${APACHE_LOG_DIR}/error.log
-    CustomLog \${APACHE_LOG_DIR}/access.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>" > /etc/apache2/sites-available/$1.conf
 
 #exit 
@@ -115,7 +115,8 @@ sudo chown -R www-data:www-data /var/www/$1/
 
 #Adding Entry of /etc/hosts
 
-sudo sed -i -e 's/localhost/'$1'/g' /etc/hosts
+sudo -i -e sed '/127.0.1.1/a 127.0.0.1      '$1 /etc/hosts
+#sudo sed -i -e 's/localhost/'$1'/' /etc/hosts
 
 #Setting up database configuration
 
@@ -124,7 +125,7 @@ sudo cp /var/www/$1/wp-config-sample.php /var/www/$1/wp-config.php
 sudo sed -i -e 's/database_name_here/'$1'_db/g' /var/www/$1/wp-config.php
 sudo sed -i -e 's/username_here/root/g' /var/www/$1/wp-config.php
 sudo sed -i -e 's/password_here//g' /var/www/$1/wp-config.php
-sudo sed -i -e 's/localhost/'$1'/g' /var/www/$1/wp-config.php
+sudo sed -i -e 's/localhost/'$1'/9' /var/www/$1/wp-config.php
 
 #nginx service restart
 
