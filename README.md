@@ -79,6 +79,12 @@ This is for granting permission to execute command on server without entering su
 ```
 <your username> ALL=(ALL) NOPASSWD: ALL  
 ```
+press
+```
+1.ctrl + x
+2.'y' to save and 'n' to discard
+3.Enter
+```
 Initial server setup has been done
 
 ### Step 4: After Successfully setting up installation file run command
