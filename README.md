@@ -100,7 +100,18 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 * clean up temporary file.
 * you are ready to go. you can now open your domain name.
 
-## Modules used
+## File structure
+
+```
+.
+├── install.sh
+├── LICENSE
+├── setup_script.sh
+├── wordpress_server
+├── wordpress_server.1.gz
+```
+
+## Built with
 
 * [Apache](https://www.apache.org/) - for server.
 * [PHP](https://www.php.net/) - for web development.
