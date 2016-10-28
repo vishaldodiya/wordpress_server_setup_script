@@ -7,6 +7,6 @@ then
 else
 domain=$3 
 
-ssh -l $1 $2 'bash -s' < setup_script.sh $domain $uname;
+ssh -l $1 $2 'bash -s' < /usr/local/bin/setup_script.sh $domain;
 
 fi

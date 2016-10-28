@@ -84,11 +84,13 @@ sudo chown -R www-data:www-data /etc/apache2/sites-available/$1.conf
 #    </body>
 #</html>" > /var/www/$1/public_html/index.html
 
-sudo printf "DocumentRoot /var/www/$1/public_html
-ServerName www.$1
-ServerAlias $1
-ErrorLog \${APACHE_LOG_DIR}/error.log
-CustomLog \${APACHE_LOG_DIR}/access.log" > /etc/apache2/sites-available/$1.conf
+sudo printf "<VirtualHost *:80>
+    DocumentRoot /var/www/$1/public_html
+    ServerName www.$1
+    ServerAlias $1
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log
+</VirtualHost>" > /etc/apache2/sites-available/$1.conf
 
 #exit 
 

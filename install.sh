@@ -18,14 +18,13 @@ ssh-add
 
 uname=$(whoami)
 
-ssh $1@$2 $uname << EOF
+ssh $1@$2 << EOF
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 touch ~/.ssh/authorized_keys
-sudo adduser $1 www-data
 EOF
 
-cat ~/.ssh/id_rsa.pub | ssh $1@$2 "cat >> .ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh $1@$2 "cat >> .ssh/authorized_keys; sudo adduser $uname www-data"
 
 
 echo "============================================================================"
