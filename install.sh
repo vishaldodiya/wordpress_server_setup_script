@@ -1,7 +1,7 @@
 if [ -z "$1" -o -z "$2" ]
 then
     echo "Enter valid Argument"
-    echo "Enter command in specified format: sh install.sh <username> <ip address>"
+    echo "Enter command in specified format: sh install.sh <server username> <server ip> <domain name(example.com)>"
 else
 
 sudo cp wordpress_server /bin/wordpress_server
@@ -40,6 +40,6 @@ echo "Initial Server Setup done Now you Can run wordpress_server command to setu
 echo "\n"
 echo "You can now run wordpress_server command globally"
 echo "\n"
-echo "Example: $ wordpress_server <username> <ip adress> <example.com(domain name)>"
+echo "Example: $ wordpress_server <username> <ip adress> <domain name(example.com)>"
 
 fi

@@ -2,7 +2,7 @@
 if [ -z "$1" -o -z "$2" -o -z "$3" ]
 then
     echo "Enter valid Argument"
-    echo "Enter command in specified format: wordpress_server <username> <ip address> <example.com>"
+    echo "Enter command in specified format: wordpress_server <server username> <server ip> <domain name(example.com)>"
     echo "for more information see MAN page of wordpress_server"
 else
 domain=$3 

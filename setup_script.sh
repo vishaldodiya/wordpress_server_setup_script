@@ -139,7 +139,7 @@ sudo rm -r ~/wordpress
 
 echo "+==================================================================+"
 echo "||         Your Wordpress files are settled up                    ||"
-echo "||you can now open your website to check server is wordking or not||"
+echo "||you can now open your website to check server is working or not ||"
 echo "+==================================================================+"
 echo "||                           THANK YOU                            ||"
 echo "+==================================================================+"
