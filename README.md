@@ -29,7 +29,7 @@ or
 download zip file and unzip it.
 ```
 
-### Step 2: move to wordpress_server_setup_script folder and run below command many time server ask for password, enter your server user password 
+### Step 2: move to wordpress_server_setup_script folder and run below command, many time script will ask for password, enter your server user password. 
 
 ```
 $ sh install.sh <server username> <server ip>
@@ -120,7 +120,7 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 * [Mysql](http://www.mysql.com/) - for database.
 * [Nginx](https://www.nginx.com/) - for rapid server deployment and accelerates content and application delivery.
 * [Wordpress](https://wordpress.com/) - for wordpress files.
-* [SSH](https://www.ssh.com/) - for secure communication between clint and server.
+* [SSH](https://www.ssh.com/) - for secure communication between client and server.
 
 ## Authors
 
