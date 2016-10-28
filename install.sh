@@ -27,15 +27,19 @@ EOF
 cat ~/.ssh/id_rsa.pub | ssh $1@$2 "cat >> .ssh/authorized_keys; sudo adduser $uname www-data"
 
 
-echo "============================================================================"
+echo "+===========================================================================+"
 echo "|| To Automate our script you need to insert below command in sudoers file.||"
-echo "============================================================================"
-echo "|| <your username> ALL=(ALL) NOPASSWD: ALL                                ||"
-echo "============================================================================"
+echo "+===========================================================================+"
+echo "|| <your username> ALL=(ALL) NOPASSWD: ALL                                 ||"
+echo "+===========================================================================+"
 ssh -t $1@$2 'sudo visudo'
 
 
-
+echo "\n\n"
 echo "Initial Server Setup done Now you Can run wordpress_server command to setup wordpress file on your server"
+echo "\n"
+echo "You can now run wordpress_server command globally"
+echo "\n"
+echo "Example: $ wordpress_server <username> <ip adress> <example.com(domain name)>"
 
 fi
