@@ -23,7 +23,7 @@ A step by step example will lead to environment setup of this command
 ```
 git clone https://github.com/vishaldodiya/wordpress_server_setup_script.git
 ```
-#### or
+or
 
 ```
 download zip file and unzip it.
@@ -37,22 +37,22 @@ $ sh install.sh <server username> <server ip>
 ### Step 3: ssh public key setup
 
 
-#### you will now see below line
+you will now see below line
 ```
 Enter file in which to save the key (/home/username/.ssh/id_rsa): 
 ```
-#### for sake of simplicity leave it blank, press enter
-#### then for
+for sake of simplicity leave it blank, press enter
+then for
 ```
 Enter passphrase (empty for no passphrase): 
 ```
-#### press Enter
-#### for
+press Enter
+for
 ```
 Enter same passphrase again: 
 ```
-#### press Enter
-#### you will see pattern like below
+press Enter
+you will see pattern like below
 ```
 The key's randomart image is:
 +---[RSA 2048]----+
@@ -67,7 +67,7 @@ The key's randomart image is:
 |o                |
 +----[SHA256]-----+
 ```
-#### you will see below pattern and redirected to enter password or vi editor
+you will see below pattern and redirected to enter password or vi editor
 ```
 ============================================================================
 || To Automate our script you need to insert below command in sudoers file.||
@@ -75,16 +75,28 @@ The key's randomart image is:
 || <your username> ALL=(ALL) NOPASSWD: ALL                                ||
 ============================================================================
 ```
-#### This is for granting permission to execute command on server without entering sudo password. It will make an entry of user which grant permission to that user. I have used a visudo editor because it is safe to use if some error occur it will not let you save the file. So enter below line carefully at the end of the file..
+This is for granting permission to execute command on server without entering sudo password. It will make an entry of user which grant permission to that user. I have used a visudo editor because it is safe to use if some error occur it will not let you save the file. So enter below line carefully at the end of the file..
 ```
 <your username> ALL=(ALL) NOPASSWD: ALL  
 ```
-#### Initial server setup has been done
+Initial server setup has been done
 
 ### Step 4: After Successfully setting up installation file run command
 
 ```
 $ wordpress_server <server username> <server ip> <domain name(example.com)>
 ```
-check for Apache2, if not installed then install it.
-check fot PHP, if not installed then install it
+#### process
+```
+* check for Apache2, if not then will get installed.
+* check for PHP, if not then will get installed.
+* check for mysql-server, if not then will get installed.
+* check for nginx, if not then will get installed.
+* make directory of domain name in /var/www/ (e.g /var/www/example.com) and needed permission granted here I have granted full permission
+* make configuration file in apache server and make necessary changes in file.
+* It will now download wordpress latest file using wget and then extract it move the file to /var/www/example.com/
+* Update hosts file make entry of domain name with localhost ip in /etc/hosts/ file. (e.g 127.0.0.1     example.com)
+* Restart nginx
+* clean up temporary file.
+* you are ready to go. you can now open your domain name.
+```
