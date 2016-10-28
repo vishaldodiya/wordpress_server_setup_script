@@ -87,7 +87,7 @@ press
 ```
 Initial server setup has been done
 
-### Step 4: After Successfully setting up installation file run command
+### Step 4: After Successfully setting up installation file, run below command
 
 ```
 $ wordpress_server <server username> <server ip> <domain name(example.com)>
