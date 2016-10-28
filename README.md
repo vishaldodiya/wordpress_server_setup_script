@@ -100,3 +100,15 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 * clean up temporary file.
 * you are ready to go. you can now open your domain name.
 ```
+
+## Modules used
+
+```
+* [Apache](https://www.apache.org/) - for server.
+* [PHP](https://www.php.net/) - for web development.
+* [Mysql](http://www.mysql.com/) - for database.
+* [Nginx](https://www.nginx.com/) - for rapid server deployment and accelerates content and application delivery.
+* [Wordpress](https://wordpress.com/) - for wordpress files.
+* [SSH](https://www.ssh.com/) - for secure communication between clint and server.
+```
+
