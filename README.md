@@ -87,7 +87,7 @@ Initial server setup has been done
 $ wordpress_server <server username> <server ip> <domain name(example.com)>
 ```
 #### process
-```
+
 * check for Apache2, if not then will get installed.
 * check for PHP, if not then will get installed.
 * check for mysql-server, if not then will get installed.
@@ -99,16 +99,21 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 * Restart nginx
 * clean up temporary file.
 * you are ready to go. you can now open your domain name.
-```
 
 ## Modules used
 
-```
 * [Apache](https://www.apache.org/) - for server.
 * [PHP](https://www.php.net/) - for web development.
 * [Mysql](http://www.mysql.com/) - for database.
 * [Nginx](https://www.nginx.com/) - for rapid server deployment and accelerates content and application delivery.
 * [Wordpress](https://wordpress.com/) - for wordpress files.
 * [SSH](https://www.ssh.com/) - for secure communication between clint and server.
-```
+
+## Authors
+
+* **Vishal Dodiya** - *Github profile* - [Vishal Dodiya](https://github.com/vishaldodiya)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
