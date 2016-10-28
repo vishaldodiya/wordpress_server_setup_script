@@ -104,8 +104,10 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 
 ```
 .
+.
 ├── install.sh
 ├── LICENSE
+├── README.md
 ├── setup_script.sh
 ├── wordpress_server
 ├── wordpress_server.1.gz
