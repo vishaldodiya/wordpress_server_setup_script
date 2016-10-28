@@ -115,7 +115,7 @@ sudo chown -R www-data:www-data /var/www/$1/
 
 #Adding Entry of /etc/hosts
 
-sudo -i -e sed '/127.0.1.1/a 127.0.0.1      '$1 /etc/hosts
+sudo sed -i -e '/127.0.1.1/a 127.0.0.1      '$1 /etc/hosts
 #sudo sed -i -e 's/localhost/'$1'/' /etc/hosts
 
 #Setting up database configuration
@@ -137,7 +137,12 @@ sudo rm ~/latest.tar.gz
 
 sudo rm -r ~/wordpress
 
-
+echo "+==================================================================+"
+echo "||         Your Wordpress files are settled up                    ||"
+echo "||you can now open your website to check server is wordking or not||"
+echo "+==================================================================+"
+echo "||                           THANK YOU                            ||"
+echo "+==================================================================+"
 
 
     
