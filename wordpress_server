@@ -5,7 +5,8 @@ then
     echo "Enter command in specified format: wordpress_server <username> <ip address> <example.com>"
     echo "for more information see MAN page of wordpress_server"
 else
+domain=$3 
 
-ssh -l $1 $2 'bash -s' < /usr/local/bin/setup_script.sh;
+ssh -l $1 $2 'bash -s' < setup_script.sh $domain $uname;
 
 fi

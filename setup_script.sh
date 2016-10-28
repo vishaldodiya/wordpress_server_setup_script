@@ -61,41 +61,40 @@ else
             
 fi
 
-
-
-#reading Domain name
-#read -p "Enter your Domain name:" domain    
-#echo -n "Enter your Domain name"
-#read domain
-
-    #making domain directory
-
-sudo mkdir /var/www/$3/public_html
+sudo mkdir -p /var/www/$1
     
 #granting permission
 
-sudo chown www-data:www-data /var/www/$3/public_html
-sudo chmod 755 /var/www/$3/public_html
 
-sudo echo "<html>\
-               <head>\
-                   <title>\
-                       Welcome hosted!\
-                   </title>\
-              </head>\
-                    
-               <body>\
-                  <h1>It Worked!!! :) :)</h1>\
-                </body>\
-            </html>" > /var/www/$3/public_html/index.html
+#sudo touch /var/www/$1/public_html/index.html
+sudo touch /etc/apache2/sites-available/$1.conf
 
-sudo echo "DocumentRoot /var/www/$3/public_html\
-            ServerName www.$3\
-            ServerAlias $3\
-            ErrorLog \${APACHE_LOG_DIR}/error.log\
-            CustomLog \${APACHE_LOG_DIR}/access.log" > /etc/apache2/sites-available/$domain.conf
+sudo chmod 777 /etc/apache2/sites-available/$1.conf
+sudo chown -R www-data:www-data /etc/apache2/sites-available/$1.conf
 
-sudo a2ensite $domain.conf
+#sudo printf "<html>
+#    <head>
+#        <title>
+#            Welcome hosted!
+#        </title>
+#    </head>
+#                    
+#    <body>
+#        <h1>It Worked!!! :) :)</h1>
+#    </body>
+#</html>" > /var/www/$1/public_html/index.html
+
+sudo printf "DocumentRoot /var/www/$1/public_html
+ServerName www.$1
+ServerAlias $1
+ErrorLog \${APACHE_LOG_DIR}/error.log
+CustomLog \${APACHE_LOG_DIR}/access.log" > /etc/apache2/sites-available/$1.conf
+
+#exit 
+
+site=$1.conf
+echo $site
+sudo a2ensite $site
 
 sudo service apache2 restart
 
@@ -105,12 +104,37 @@ wget -c http://wordpress.org/latest.tar.gz
 
 tar -xzvf latest.tar.gz
 
-sudo rsync -av wordpress/* /var/www/$3/
+sudo rsync -av wordpress/* /var/www/$1/
 
-#setting up database
+sudo touch /var/www/$1/wp-config.php
 
-mysql -u root -p
+sudo chmod -R 777 /var/www/$1/
+sudo chown -R www-data:www-data /var/www/$1/
 
-CREATE DATABASE $3\_db;
+#Adding Entry of /etc/hosts
+
+sudo sed -i -e 's/localhost/'$1'/g' /etc/hosts
+
+#Setting up database configuration
+
+sudo cp /var/www/$1/wp-config-sample.php /var/www/$1/wp-config.php
+
+sudo sed -i -e 's/database_name_here/'$1'_db/g' /var/www/$1/wp-config.php
+sudo sed -i -e 's/username_here/root/g' /var/www/$1/wp-config.php
+sudo sed -i -e 's/password_here//g' /var/www/$1/wp-config.php
+sudo sed -i -e 's/localhost/'$1'/g' /var/www/$1/wp-config.php
+
+#nginx service restart
+
+sudo service nginx restart
+
+#Removing temporary files
+
+sudo rm ~/latest.tar.gz
+
+sudo rm -r ~/wordpress
+
+
+
 
     
