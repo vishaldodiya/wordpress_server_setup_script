@@ -10,7 +10,7 @@ wordpress_server \ diploy new wordpress server file on ubuntu server
 wordpress_server <server username> <server ip> <domain name(example.com)>
 
 .SH DESCRIPTION
-wordpress_server is smart command that deploy wordpress server on user specified ubuntu server. It will check on the server for prerequisite like, LAMP modules which include Apache, Mysql and PHP. If this modeules are not installed on server than wordpress_server will install this modules on that server.
+wordpress_server is smart command that deploy wordpress files on user specified ubuntu server. It will check on the server for prerequisite like, LAMP modules which include Apache, Mysql and PHP. If this modeules are not installed on server than wordpress_server will install this modules on that server.
 
 Another module that wordpress server check is for Nginx which accelerates content and application delivery, improves security, facilitates availability and scalability for the busiest web sites on the Internet.If Nginx is not installed than it will be installed by wordpress_server command on ubuntu server with proper firewall previlidges
 
