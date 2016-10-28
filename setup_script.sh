@@ -115,7 +115,7 @@ sudo chown -R www-data:www-data /var/www/$1/
 
 #Adding Entry of /etc/hosts
 
-sudo sed -i -e '/127.0.1.1/a 127.0.0.1      '$1 /etc/hosts
+sudo sed -i -e '1 i\127.0.0.1      '$1 /etc/hosts
 #sudo sed -i -e 's/localhost/'$1'/' /etc/hosts
 
 #Setting up database configuration
