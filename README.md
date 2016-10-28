@@ -111,9 +111,9 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 
 ## Authors
 
-* **Vishal Dodiya** - *Github profile* - [Vishal Dodiya](https://github.com/vishaldodiya)
+* **Vishal Dodiya** - *Whole smart work* - [Profile](https://github.com/vishaldodiya)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/vishaldodiya/wordpress_server_setup_script/blob/master/LICENSE) file for details
 
