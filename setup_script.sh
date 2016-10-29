@@ -93,7 +93,7 @@ sudo printf " server {
 
 #make symbolic link between sites-available and sites-enabled example.com file
 
-sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
+sudo ln -s /etc/nginx/sites-available/$1/etc/nginx/sites-enabled/$1
 
 
 sudo rm /etc/nginx/sites-enabled/default
