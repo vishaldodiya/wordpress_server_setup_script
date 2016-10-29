@@ -1,6 +1,6 @@
 # wordpress_server_setup_script
 
-wordpress_server is smart command that deploy wordpress files on user specified ubuntu server. It will check on the server for prerequisite like, LAMP modules which include Apache, Mysql and PHP. If this modeules are not installed on server than wordpress_server will install this modules on that server.
+wordpress_server is smart command that deploy wordpress files on user specified ubuntu server. It will check on the server for prerequisite like, LAMP modules which include Mysql and PHP & Nginx. If this modeules are not installed on server than wordpress_server will install this modules on that server.
 
 ## Getting Started
 
@@ -94,15 +94,14 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 ```
 #### process
 
-* check for Apache2, if not then will get installed.
 * check for PHP, if not then will get installed.
 * check for mysql-server, if not then will get installed.
 * check for nginx, if not then will get installed.
 * make directory of domain name in /var/www/ (e.g /var/www/example.com) and needed permission granted here I have granted full permission
-* make configuration file in apache server and make necessary changes in file.
-* It will now download wordpress latest file using wget and then extract it move the file to /var/www/example.com/
-* Update hosts file make entry of domain name with localhost ip in /etc/hosts/ file. (e.g 127.0.0.1     example.com)
-* Restart nginx
+* make configuration file in Nginx server and make necessary changes in file.
+* It will now download wordpress latest file using wget and then extract it and move the file to /var/www/example.com/
+* Update hosts file, make entry of domain name with localhost ip in /etc/hosts/ file. (e.g 127.0.0.1     example.com)
+* Restart Nginx
 * clean up temporary file.
 * you are ready to go. you can now open your domain name.
 
@@ -121,10 +120,9 @@ $ wordpress_server <server username> <server ip> <domain name(example.com)>
 
 ## Built with
 
-* [Apache](https://www.apache.org/) - for server.
 * [PHP](https://www.php.net/) - for web development.
 * [Mysql](http://www.mysql.com/) - for database.
-* [Nginx](https://www.nginx.com/) - for rapid server deployment and accelerates content and application delivery.
+* [Nginx](https://www.nginx.com/) - for Server.Rapid server deployment and accelerates content and application delivery.
 * [Wordpress](https://wordpress.com/) - for wordpress files.
 * [SSH](https://www.ssh.com/) - for secure communication between client and server.
 
