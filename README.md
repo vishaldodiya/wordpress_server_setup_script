@@ -1,6 +1,6 @@
 # wordpress_server_setup_script
 
-wordpress_server is smart command that deploy wordpress files on user specified ubuntu server. It will deploy your wordpress data of website on Nginx server.It will check on the server for prerequisite like, LAMP modules which include Mysql and PHP & Nginx. If this modeules are not installed on server than wordpress_server will install this modules on that server.
+wordpress_server is smart command that deploy wordpress files on user specified ubuntu server. It will check on the server for prerequisite like, LAMP modules which include Mysql and PHP & Nginx. If this modeules are not installed on server than wordpress_server will install this modules on that server.
 
 ## Getting Started
 
