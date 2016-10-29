@@ -1,11 +1,11 @@
-apache=$(apt-cache policy apache2 | grep "Installed" | awk -F' ' '{print $2}')
+#apache=$(apt-cache policy apache2 | grep "Installed" | awk -F' ' '{print $2}')
 
-if test "$apache" != "(none)";
-then 
-    echo "Apache2 is already installed"
-else
-    sudo apt install -y apache2
-fi
+#if test "$apache" != "(none)";
+#then 
+#    echo "Apache2 is already installed"
+#else
+#    sudo apt install -y apache2
+#fi
 
 #checking for PHP
 
@@ -63,14 +63,11 @@ fi
 
 sudo mkdir -p /var/www/$1
     
-#granting permission
-
-
 #sudo touch /var/www/$1/public_html/index.html
-sudo touch /etc/apache2/sites-available/$1.conf
+sudo touch /etc/nginx/sites-available/$1
 
-sudo chmod 777 /etc/apache2/sites-available/$1.conf
-sudo chown -R www-data:www-data /etc/apache2/sites-available/$1.conf
+sudo chmod 775 /etc/nginx/sites-available/$1
+sudo chown -R www-data:www-data /etc/nginx/sites-available/$1
 
 #sudo printf "<html>
 #    <head>
@@ -84,21 +81,22 @@ sudo chown -R www-data:www-data /etc/apache2/sites-available/$1.conf
 #    </body>
 #</html>" > /var/www/$1/public_html/index.html
 
-sudo printf "<VirtualHost *:80>
-    DocumentRoot /var/www/$1/public_html
-    ServerName www.$1
-    ServerAlias $1
-    ErrorLog \${APACHE_LOG_DIR}/error.log
-    CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>" > /etc/apache2/sites-available/$1.conf
+sudo printf " server {
+        listen   80; 
+        #listen   [::]:80 default ipv6only=on;
 
-#exit 
+        root /var/www/$1;
+        index index.html index.htm index.php;
 
-site=$1.conf
-echo $site
-sudo a2ensite $site
+        server_name $1;
+}" > /etc/nginx/sites-available/$1
 
-sudo service apache2 restart
+#make symbolic link between sites-available and sites-enabled example.com file
+
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
+
+
+sudo rm /etc/nginx/sites-enabled/default
 
 #install wordpress on server
 
@@ -110,8 +108,9 @@ sudo rsync -av wordpress/* /var/www/$1/
 
 sudo touch /var/www/$1/wp-config.php
 
-sudo chmod -R 777 /var/www/$1/
+#granting permission
 sudo chown -R www-data:www-data /var/www/$1/
+sudo chmod -R 775 /var/www/$1/
 
 #Adding Entry of /etc/hosts
 
