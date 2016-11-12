@@ -1,13 +1,5 @@
-#apache=$(apt-cache policy apache2 | grep "Installed" | awk -F' ' '{print $2}')
-
-#if test "$apache" != "(none)";
-#then 
-#    echo "Apache2 is already installed"
-#else
-#    sudo apt install -y apache2
-#fi
-
 #checking for PHP
+echo "=====================================================================:php"
 
 php=$(apt-cache policy php | grep "Installed" | awk -F' ' '{print $2}')
 
@@ -19,6 +11,7 @@ else
 fi
 
 #checking for mysql
+echo "=====================================================================:mysql"
 
 mysql=$(apt-cache policy mysql | grep "Installed" | awk -F' ' '{print $2}')
 
@@ -31,6 +24,8 @@ fi
 
 #checking for Nginx
 
+echo "=====================================================================:nginx"
+
 nginx=$(apt-cache policy nginx | grep "Installed" | awk -F' ' '{print $2}')
 
 if test "$nginx" != "(none)";
@@ -39,92 +34,101 @@ then
 else
     sudo apt-get update
     sudo apt-get install -y nginx
-#    ufw_status=$(sudo ufw status)
-
-#    if test "$ufw_status" != "Status: inactive";
-#    then
-#        echo "ufw is active"
-#        nginx_status=$(sudo ufw status | grep "^Nginx HTTP" | awk -F' ' '{print $3}')
-#        nginx_v6_status=$(sudo ufw status | grep "^Nginx HTTP (v6)" | awk -F' ' '{print $4}')
-#        
-#        if $nginx_status = deny || $nginx_v6_status = deny;
-#         then
-#              sudo ufw allow 'Nginx HTTP'
-#        else
-#            echo "Nginx completely installed"
-#       fi
-#            
-#    else
-#        sudo ufw enable
-#        sudo ufw allow 'Nginx HTTP'
-#    fi
-            
+  
 fi
 
-sudo mkdir -p /var/www/$1
+echo "============================================================================================"
+
+
+echo "Please Enter Domain name:"
+read domain
+
+sudo mkdir -p /var/www/$domain
     
 #sudo touch /var/www/$1/public_html/index.html
-sudo touch /etc/nginx/sites-available/$1
+sudo touch /etc/nginx/sites-available/$domain
 
-sudo chmod 775 /etc/nginx/sites-available/$1
-sudo chown -R www-data:www-data /etc/nginx/sites-available/$1
+sudo chmod 775 /etc/nginx/sites-available/$domain
+sudo chown -R www-data:www-data /etc/nginx/sites-available/$domain
 
-#sudo printf "<html>
-#    <head>
-#        <title>
-#            Welcome hosted!
-#        </title>
-#    </head>
-#                    
-#    <body>
-#        <h1>It Worked!!! :) :)</h1>
-#    </body>
-#</html>" > /var/www/$1/public_html/index.html
 
 sudo printf " server {
         listen   80; 
-        #listen   [::]:80 default ipv6only=on;
+        listen   [::]:80;
 
-        root /var/www/$1;
+	server_name $domain;        
+	root /var/www/$domain;
         index index.html index.htm index.php;
-
-        server_name $1;
-}" > /etc/nginx/sites-available/$1
+	
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+        
+}" > /etc/nginx/sites-available/$domain
 
 #make symbolic link between sites-available and sites-enabled example.com file
 
-sudo ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
+sudo ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/$domain
 
 
 sudo rm /etc/nginx/sites-enabled/default
 
 #install wordpress on server
 
+echo "===========================================================================:wordpress"
+
 wget -c http://wordpress.org/latest.tar.gz
 
 tar -xzvf latest.tar.gz
 
-sudo rsync -av wordpress/* /var/www/$1/
+sudo rsync -av wordpress/* /var/www/$domain/
 
-sudo touch /var/www/$1/wp-config.php
+sudo touch /var/www/$domain/wp-config.php
+
+echo "===========================================================================:wordpress done"
 
 #granting permission
-sudo chown -R www-data:www-data /var/www/$1/
-sudo chmod -R 775 /var/www/$1/
+sudo chown -R www-data:www-data /var/www/$domain/
+sudo chmod -R 775 /var/www/$domain/
 
 #Adding Entry of /etc/hosts
 
-sudo sed -i -e '1 i\127.0.0.1      '$1 /etc/hosts
-#sudo sed -i -e 's/localhost/'$1'/' /etc/hosts
+sudo sed -i -e '1 i\127.0.0.1      '$domain /etc/hosts
+#sudo sed -i -e 's/localhost/example.com/' /etc/hosts
 
 #Setting up database configuration
 
-sudo cp /var/www/$1/wp-config-sample.php /var/www/$1/wp-config.php
+sudo printf "<?php
+	define('DB_NAME', '"$domain"_db');
+	define('DB_USER', 'root');
+	define('DB_PASSWORD', '');
+	define('DB_HOST', 'localhost');
+	define('DB_CHARSET', 'utf8')
+	define('DB_COLLATE', '');
 
-sudo sed -i -e 's/database_name_here/'$1'_db/g' /var/www/$1/wp-config.php
-sudo sed -i -e 's/username_here/root/g' /var/www/$1/wp-config.php
-sudo sed -i -e 's/password_here//g' /var/www/$1/wp-config.php
-sudo sed -i -e 's/localhost/'$1'/9' /var/www/$1/wp-config.php
+	define('AUTH_KEY',         'put your unique phrase here');
+	define('SECURE_AUTH_KEY',  'put your unique phrase here');
+	define('LOGGED_IN_KEY',    'put your unique phrase here');
+	define('NONCE_KEY',        'put your unique phrase here');
+	define('AUTH_SALT',        'put your unique phrase here');
+	define('SECURE_AUTH_SALT', 'put your unique phrase here');
+	define('LOGGED_IN_SALT',   'put your unique phrase here');
+	define('NONCE_SALT',       'put your unique phrase here');
+		
+	\$table_prefix  = 'wp_';
+
+	define('WP_DEBUG', false);
+
+	define('WP_HOME','http://$domain');
+	define('WP_SITEURL','http://$domain');
+
+	define( 'WP_AUTO_UPDATE_CORE', false );
+	
+	
+?>" > /var/www/$domain/wp-config.php
+
+#sudo cp /var/www/example.com/wp-config-sample.php /var/www/example.com/wp-config.php
+
 
 #nginx service restart
 
@@ -132,9 +136,9 @@ sudo service nginx restart
 
 #Removing temporary files
 
-sudo rm ~/latest.tar.gz
+sudo rm /home/ubuntu/latest.tar.gz
 
-sudo rm -r ~/wordpress
+sudo rm -r /home/ubuntu/wordpress
 
 echo "+==================================================================+"
 echo "||         Your Wordpress files are settled up                    ||"
